@@ -1,0 +1,119 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
+buildscript {
+    ext.repositoryName = project.name
+    ext.versionsProperties = new Properties()
+    file("versions.properties").withInputStream { versionsProperties.load(it) }
+
+    repositories {
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap" }
+        maven { url "http://dl.bintray.com/kotlin/kotlin-dev" }
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versionsProperties.kotlin}"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
+    }
+}
+
+apply plugin: "java"
+apply plugin: "kotlin"
+apply plugin: "idea"
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'application'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+group 'com.lightningkite'
+version versionsProperties.getProperty('konvenience')
+
+mainClassName = 'com.lightningkite.konvenience.MainKt'
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+    google()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+
+}
+
+gradlePlugin {
+    plugins {
+        konveniencePlugin {
+            id = "com.lightningkite.konvenience"
+            implementationClass = "com.lightningkite.konvenience.gradle.KonveniencePlugin"
+        }
+    }
+}
+
+
+dependencies {
+    api gradleApi()
+    api "org.jetbrains.kotlin:kotlin-stdlib:${versionsProperties.kotlin}"
+    api group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: versionsProperties.kotlin
+    api group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin-api', version: versionsProperties.kotlin
+    api group: 'org.jetbrains.dokka', name: 'dokka-gradle-plugin', version: '0.9.17'
+    api 'com.squareup.okhttp3:okhttp:3.13.1'
+//    api group: 'gradle.plugin.org.gradle.kotlin', name: 'gradle-kotlin-dsl-plugins', version: '1.1.3'
+//    api group: 'org.gradle.kotlin.kotlin-dsl.base', name: 'org.gradle.kotlin.kotlin-dsl.base.gradle.plugin', version: '1.1.3', ext: 'pom'
+
+//    implementation "com.fasterxml.jackson.core:jackson-databind:2.9.6"
+//    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.6"
+    testCompile 'junit:junit:4.12'
+}
+
+
+
+// Load `bintray.properties` file, if it exists. You can put your bintrayUser and bintrayApiKey values there, that file is ignored by git
+if (Files.exists(Paths.get("$project.rootDir/../../local.properties"))) {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream("$project.rootDir/../../local.properties"))
+    localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
+}
+if (Files.exists(Paths.get("$project.rootDir/../local.properties"))) {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream("$project.rootDir/../local.properties"))
+    localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
+}
+if (Files.exists(Paths.get("$project.rootDir/local.properties"))) {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream("$project.rootDir/local.properties"))
+    localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
+}
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publish = project.bintrayPublish
+    override = true // for multi-platform Kotlin/Native publishing
+
+    pkg {
+        userOrg = project.bintrayOrganization
+        repo = project.bintrayRepository
+        name = project.name
+        licenses = [project.bintrayLicense]
+        vcsUrl = project.vcsUrl
+        websiteUrl = project.websiteUrl
+        issueTrackerUrl = project.issuesUrl
+        version {
+            name = project.version
+            vcsTag = project.version
+            released = new Date()
+        }
+    }
+}
+
+
+// This is for easier debugging of bintray uploading problems
+bintrayUpload.doFirst {
+    publications = project.publishing.publications.findAll {
+        !it.name.contains('-test') && it.name != 'kotlinMultiplatform'
+    }.collect {
+        println("Uploading artifact '$it.groupId:$it.artifactId:$it.version' from publication '$it.name'")
+        for (art in it.artifacts) {
+            println("ART: ${art.getFile()}")
+        }
+        it.name
+    }
+}
