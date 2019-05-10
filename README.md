@@ -27,11 +27,9 @@ buildscript {
         maven("https://dl.bintray.com/lightningkite/com.lightningkite.krosslin")
     }
     dependencies {
-        classpath("com.lightningkite:konvenience:+")
-        classpath("com.lightningkite:mirror-plugin:0.1.1")
+        classpath("com.lightningkite:konvenience:+")ts
     }
 }
-apply(plugin = "com.lightningkite.mirror")
 apply(plugin = "com.lightningkite.konvenience")
 
 //Normal repositories entry
@@ -272,7 +270,7 @@ kotlin {
 
 ### Easy publishing to Bintray
 
-Pulls from 'local.properties', either in the directory of the project or at maximum 2 directories up from it.
+Pulls `bintrayUser` and a `bintrayKey` from 'local.properties', either in the directory of the project or at maximum 2 directories up from it.
 
 You need a `bintrayUser` and a `bintrayKey` to upload to Bintray.
 

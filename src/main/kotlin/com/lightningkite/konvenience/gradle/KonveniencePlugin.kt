@@ -20,7 +20,7 @@ open class KonveniencePlugin : Plugin<Project> {
                     .forEach { load(it.inputStream()) }
         }
         target.extensions.add("localProperties", locals)
-        target.doNotPublishMetadata()
+        target.afterEvaluate { BuildInfo.print() }
     }
 }
 

@@ -4,7 +4,9 @@ import java.nio.file.Paths
 buildscript {
     ext.repositoryName = project.name
     ext.versionsProperties = new Properties()
+    println("Loading versions from ${file("versions.properties").absolutePath}")
     file("versions.properties").withInputStream { versionsProperties.load(it) }
+    println("versionsProperties: ${versionsProperties}")
 
     repositories {
         maven { url "http://dl.bintray.com/kotlin/kotlin-eap" }
@@ -27,6 +29,7 @@ apply plugin: 'com.jfrog.bintray'
 
 group 'com.lightningkite'
 version versionsProperties.getProperty('konvenience')
+println("Version: ${project.version}")
 
 mainClassName = 'com.lightningkite.konvenience.MainKt'
 
@@ -67,9 +70,9 @@ dependencies {
 
 
 // Load `bintray.properties` file, if it exists. You can put your bintrayUser and bintrayApiKey values there, that file is ignored by git
-if (Files.exists(Paths.get("$project.rootDir/../../local.properties"))) {
+if (Files.exists(Paths.get("$project.rootDir/local.properties"))) {
     def localProperties = new Properties()
-    localProperties.load(new FileInputStream("$project.rootDir/../../local.properties"))
+    localProperties.load(new FileInputStream("$project.rootDir/local.properties"))
     localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
 }
 if (Files.exists(Paths.get("$project.rootDir/../local.properties"))) {
@@ -77,9 +80,9 @@ if (Files.exists(Paths.get("$project.rootDir/../local.properties"))) {
     localProperties.load(new FileInputStream("$project.rootDir/../local.properties"))
     localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
 }
-if (Files.exists(Paths.get("$project.rootDir/local.properties"))) {
+if (Files.exists(Paths.get("$project.rootDir/../../local.properties"))) {
     def localProperties = new Properties()
-    localProperties.load(new FileInputStream("$project.rootDir/local.properties"))
+    localProperties.load(new FileInputStream("$project.rootDir/../../local.properties"))
     localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
 }
 bintray {

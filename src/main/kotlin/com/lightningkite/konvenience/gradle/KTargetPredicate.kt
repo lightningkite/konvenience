@@ -9,12 +9,14 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 
 typealias KTargetPredicate = (KTarget) -> Boolean
 
+object KTargetPredicates : TargetPredicateBuilder
+
 data class TargetPredicateWithName(val name: String, val predicate: KTargetPredicate) : KTargetPredicate by predicate
 
 fun KTargetPredicate.withName(name: String) = TargetPredicateWithName(name, this)
 
 interface TargetPredicateBuilder {
-    fun isTarget(target: KTarget): KTargetPredicate = { target.name == it.name }
+    fun isTarget(target: KTarget): KTargetPredicate = TargetPredicateWithName(target.name) { target.name == it.name }
 
     val allTargets: TargetPredicateWithName get() = TargetPredicateWithName("") { true }
 
@@ -23,12 +25,13 @@ interface TargetPredicateBuilder {
     val isNonNative: TargetPredicateWithName get() = TargetPredicateWithName("nonNative") { it.platformType == KotlinPlatformType.jvm || it.platformType == KotlinPlatformType.androidJvm || it.platformType == KotlinPlatformType.js }
     val isJvm: TargetPredicateWithName get() = TargetPredicateWithName("jvm") { it.platformType == KotlinPlatformType.jvm || it.platformType == KotlinPlatformType.androidJvm }
     val isOracleJvm: TargetPredicateWithName get() = TargetPredicateWithName("oracleJvm") { it.platformType == KotlinPlatformType.jvm }
-    val isAndroidJvm: TargetPredicateWithName get() = TargetPredicateWithName("androidJvm") { it.platformType == KotlinPlatformType.androidJvm }
+    val isAndroid: TargetPredicateWithName get() = TargetPredicateWithName("android") { it.platformType == KotlinPlatformType.androidJvm }
     val isJs: TargetPredicateWithName get() = TargetPredicateWithName("js") { it.platformType == KotlinPlatformType.js }
+
     val isNative: TargetPredicateWithName get() = TargetPredicateWithName("native") { it.platformType == KotlinPlatformType.native }
 
-    val isAndroidArm32: TargetPredicateWithName get() = TargetPredicateWithName("androidArm32") { it.konanTarget == KonanTarget.ANDROID_ARM32 }
-    val isAndroidArm64: TargetPredicateWithName get() = TargetPredicateWithName("androidArm64") { it.konanTarget == KonanTarget.ANDROID_ARM64 }
+    val isAndroidNativeArm32: TargetPredicateWithName get() = TargetPredicateWithName("androidNativeArm32") { it.konanTarget == KonanTarget.ANDROID_ARM32 }
+    val isAndroidNativeArm64: TargetPredicateWithName get() = TargetPredicateWithName("androidNativeArm64") { it.konanTarget == KonanTarget.ANDROID_ARM64 }
     val isIosArm32: TargetPredicateWithName get() = TargetPredicateWithName("iosArm32") { it.konanTarget == KonanTarget.IOS_ARM32 }
     val isIosArm64: TargetPredicateWithName get() = TargetPredicateWithName("iosArm64") { it.konanTarget == KonanTarget.IOS_ARM64 }
     val isIosX64: TargetPredicateWithName get() = TargetPredicateWithName("iosX64") { it.konanTarget == KonanTarget.IOS_X64 }
@@ -68,6 +71,44 @@ interface TargetPredicateBuilder {
                 else -> false
             }
         }
+
+    val isJavaFx: TargetPredicateWithName get() = TargetPredicateWithName("javafx") { it.attributes[KTarget.UI] == "javafx" }
+    val isJvmVirtual: TargetPredicateWithName get() = TargetPredicateWithName("jvmVirtual") { it.attributes[KTarget.UI] == "jvmVirtual" }
+
+    val binary get() = listOf(
+            isJvm,
+            isJs,
+            isAndroidNativeArm32,
+            isAndroidNativeArm64,
+            isIosArm32,
+            isIosArm64,
+            isIosX64,
+            isLinuxX64,
+            isLinuxArm32Hfp,
+            isLinuxMips32,
+            isLinuxMipsel32,
+            isMingwX64,
+            isMacosX64,
+            isWasm32
+    )
+    val ui get() = listOf(
+            isAndroid,
+            isJavaFx,
+            isJvmVirtual,
+            isJs,
+            isAndroidNativeArm32,
+            isAndroidNativeArm64,
+            isIosArm32,
+            isIosArm64,
+            isIosX64,
+            isLinuxX64,
+            isLinuxArm32Hfp,
+            isLinuxMips32,
+            isLinuxMipsel32,
+            isMingwX64,
+            isMacosX64,
+            isWasm32
+    )
 }
 
 operator fun KTargetPredicate.not(): KTargetPredicate = { !this(it) }

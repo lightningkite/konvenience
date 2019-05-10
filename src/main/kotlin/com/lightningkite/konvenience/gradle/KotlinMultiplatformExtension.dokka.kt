@@ -46,7 +46,7 @@ fun KotlinMultiplatformExtension.dokka(project: Project, configure: DokkaTask.()
     }
     project.tasks.create("dokkaJar", Jar::class.java) { task ->
         task.dependsOn("dokkaCommon")
-        task.archiveClassifier.set("javadoc")
+        task.classifier = "javadoc"
         task.from(dokkaTask.outputDirectory)
     }
     targets.forEach {

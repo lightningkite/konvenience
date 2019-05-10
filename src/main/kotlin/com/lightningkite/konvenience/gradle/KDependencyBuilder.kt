@@ -26,10 +26,10 @@ fun KDependencyBuilder.projectOrMaven(
     return {
         try {
             val dep = add(project(name, configuration))
-            println("Using local project $name")
+            BuildInfo.usingLocalProjects.add(name)
             dep
         } catch (e: Throwable) {
-            println("Using remote artifact $group:$artifact:$version due to $e")
+            BuildInfo.usingRemoteProjects.add("$group:$artifact:$version")
             add("$group:$artifact:$version")
         }
     }
