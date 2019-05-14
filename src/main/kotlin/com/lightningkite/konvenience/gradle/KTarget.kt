@@ -58,7 +58,7 @@ data class KTarget(
                 name = "androidNativeArm32",
                 platformType = KotlinPlatformType.native,
                 konanTarget = KonanTarget.ANDROID_ARM32,
-                worksOnMyPlatform = { OperatingSystem.current().isLinux || OperatingSystem.current().isMacOsX },
+//                worksOnMyPlatform = { OperatingSystem.current().isLinux || OperatingSystem.current().isMacOsX },
                 configure = { androidNativeArm32(it.name) }
         )
         val androidNativeArm64 = KTarget(
@@ -93,14 +93,12 @@ data class KTarget(
                 name = "linuxX64",
                 platformType = KotlinPlatformType.native,
                 konanTarget = KonanTarget.LINUX_X64,
-                worksOnMyPlatform = { OperatingSystem.current().isLinux },
                 configure = { linuxX64(it.name) }
         )
         val linuxArm32Hfp = KTarget(
                 name = "linuxArm32Hfp",
                 platformType = KotlinPlatformType.native,
                 konanTarget = KonanTarget.LINUX_ARM32_HFP,
-                worksOnMyPlatform = { OperatingSystem.current().isLinux },
                 configure = { linuxArm32Hfp(it.name) }
         )
         val linuxMips32 = KTarget(
