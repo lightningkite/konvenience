@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module version="4">
+<module external.linked.project.id=":konvenience" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -12,5 +12,74 @@
         <option name="BUILDABLE" value="true" />
       </configuration>
     </facet>
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="JVM 1.6" useProjectSettings="false">
+        <compilerSettings />
+        <compilerArguments>
+          <option name="destination" value="$MODULE_DIR$/build/classes/kotlin/main" />
+          <option name="classpath" value="$USER_HOME$/.gradle/caches/4.10.3/generated-gradle-jars/gradle-api-4.10.3.jar;C:/Users/josep/.gradle/wrapper/dists/gradle-4.10.3-bin/31t79e2qsceia4mkbojplrgx/gradle-4.10.3/lib/groovy-all-2.4.15.jar;C:/Users/josep/.gradle/wrapper/dists/gradle-4.10.3-bin/31t79e2qsceia4mkbojplrgx/gradle-4.10.3/lib/gradle-installation-beacon-4.10.3.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.3.30/70c672aa93cc501164b41c18918333959d78f230/kotlin-gradle-plugin-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.3.30/e02f13f8039083624f8ff6634fa6f5c897eb4833/kotlin-gradle-plugin-api-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-gradle-plugin/0.9.17/b9558823557d2871875b9ede12b1a2a141c92f44/dokka-gradle-plugin-0.9.17.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-model/1.3.30/135cb0ff1246490ea68fa696541bf3f6078a77c6/kotlin-gradle-plugin-model-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-native-utils/1.3.30/72c180f42b9e6e86f90339ec9b43de6d10605386/kotlin-native-utils-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing-gradle/1.3.30/862a7236f3a5bf5d8d5beb8353e1c424ed3fe1c6/kotlin-annotation-processing-gradle-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.3.30/6c4efb38cdff0c5c302f8ad6ebb471940fcda4d7/kotlin-android-extensions-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.3.30/e894c4a8dd7319b53a8fb357bea3a927abbccadd/kotlin-compiler-embeddable-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.3.30/b5aa87d4a75c9635915e4189f687e92ce375c054/kotlin-reflect-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.30/9ea98e65c246d34de9af59c104ad9bdea4908ee/kotlin-stdlib-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.13.1/b49cf3799bd473199e96c4fb9987e9e08395a1c0/okhttp-3.13.1.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.30/989a125fdb6e4d0d75a016032e03e1e3b57a13d/kotlin-stdlib-common-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-runner/1.3.30/64b839723e48415397d4fa50a6bedd3266c0253b/kotlin-compiler-runner-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-compiler-embeddable/1.3.30/2adeda8a8bc2cdc75230f0b7061a1f1b88642da2/kotlin-scripting-compiler-embeddable-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.17.2/78c7820b205002da4d2d137f6f312bd64b3d6049/okio-1.17.2.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.3.30/dd223593ee63574426ef98f7111862f138e40fdc/kotlin-script-runtime-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20181211/216c2e14b070f334479d800987affe4054cd563f/trove4j-1.0.20181211.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.3.30/5b53b550509ed6ada0b96c6dac058e46f3258bca/kotlin-build-common-1.3.30.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-client/1.3.30/9ab0b01afa1a7aa6897989a08ed5d92a205f793/kotlin-daemon-client-1.3.30.jar" />
+          <option name="noStdlib" value="true" />
+          <option name="noReflect" value="true" />
+          <option name="moduleName" value="konvenience" />
+          <option name="addCompilerBuiltIns" value="true" />
+          <option name="loadBuiltInsFromDependencies" value="true" />
+          <option name="languageVersion" value="1.3" />
+          <option name="apiVersion" value="1.3" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_12">
+    <output url="file://$MODULE_DIR$/build/classes/java/main" />
+    <output-test url="file://$MODULE_DIR$/build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/kotlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/kotlin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-gradle-plugin-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-gradle-plugin-api-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: dokka-gradle-plugin-0.9.17" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-gradle-plugin-model-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-native-utils-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-annotation-processing-gradle-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-android-extensions-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-compiler-embeddable-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-reflect-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-stdlib-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: okhttp-3.13.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-stdlib-common-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: annotations-13.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-compiler-runner-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-scripting-compiler-embeddable-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: okio-1.17.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-script-runtime-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: trove4j-1.0.20181211" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-build-common-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-daemon-client-1.3.30" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: gradle-api-4.10.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: groovy-all-2.4.15" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: gradle-installation-beacon-4.10.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: junit-4.12" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: gradle-test-kit-4.10.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: C__Users_josep_Projects_krosslin_konvenience_build_pluginUnderTestMetadata" level="project" />
   </component>
 </module>
