@@ -78,6 +78,19 @@ fun Project.javaApp(forTarget: KTarget = KTarget.jvm, mainClassName: String) {
         }
         task.mainClassName = mainClassName
         task.applicationName = name
+        task.doLast {
+            println("Trying to replace BAT")
+            task.outputDir.listFiles().find { it.extension.toLowerCase() == "bat" }?.let { windowsFile ->
+                val list = windowsFile.readLines().toMutableList()
+                val index = list.indexOfFirst { it.startsWith("set CLASSPATH=", true) }
+                if(index != -1){
+                    list[index] = "set CLASSPATH=%APP_HOME%\\lib\\*"
+                } else {
+                    println("Line not found in BAT: probably want the line ${list.find { it.contains("set CLASSPATH=", true) }}")
+                }
+                windowsFile.writeText(list.joinToString("\n"))
+            } ?: println("BAT file not found for fixing")
+        }
     }
 
     val installTask = tasks.create("${forTarget.name}Install", Copy::class.java) { task ->
