@@ -103,15 +103,15 @@ fun SSHClient.upload(directory: File, remotePath: String) {
     newSFTPClient().use { sftp ->
         directory.walkTopDown().forEach {
             val relative = it.toRelativeString(directory).replace('\\', '/')
-            val remote = "$fixedRemotePath/$relative"
+            val remote = if(relative.isEmpty()) fixedRemotePath else "$fixedRemotePath/$relative"
             if (it.isDirectory) {
-                sftp.mkdir(remote)
-//                exec("mkdir -p $remote")
+//                sftp.mkdir(remote)
+                exec("mkdir -p $remote")
             } else {
                 val attrs = try {
                     sftp.stat(remote)
                 } catch (t: Throwable) {
-//                    t.printStackTrace()
+                    t.printStackTrace()
                     null
                 }
                 val local = it.lastModified() / 1000
@@ -122,6 +122,8 @@ fun SSHClient.upload(directory: File, remotePath: String) {
                     println("Updating $relative to $remote...")
                     sftp.rm(remote)
                     sftp.put(FileSystemFile(it), remote)
+                } else {
+                    println("Skipping $relative because it is up to date")
                 }
             }
         }

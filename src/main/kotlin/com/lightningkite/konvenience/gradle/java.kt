@@ -62,7 +62,7 @@ fun Project.javaApp(forTarget: KTarget = KTarget.jvm, mainClassName: String) {
         task.description = "Runs the target ${forTarget.name} as a JVM application"
         task.group = TaskGroups.RUN
 
-        afterEvaluate {
+        task.doFirst {
             println("Using java ${task.executable}")
             task.classpath = jarTask.outputs.files.filter { it.extension == "jar" } + files(getDependencies())
         }
@@ -93,22 +93,22 @@ fun Project.javaApp(forTarget: KTarget = KTarget.jvm, mainClassName: String) {
         }
     }
 
-    val installTask = tasks.create("${forTarget.name}Install", Copy::class.java) { task ->
-        task.group = forTarget.name
+    val installTask = tasks.create("${forTarget.name}Install") { task ->
         task.group = TaskGroups.INSTALL
-
         task.dependsOn(jarTask)
         task.dependsOn(startScriptsTask)
-        task.destinationDir = file("build/${forTarget.name}/install")
+        val destination = File("build/${forTarget.name}/install")
+        task.outputs.upToDateWhen { false }
+        task.doLast {
+            val binFolder = File(destination, "bin")
+            val libFolder = File(destination, "lib")
 
-        afterEvaluate {
-            task.into("lib") {
-                it.from(files(getDependencies()))
-                it.from(jarTask.outputs.files.filter { it.extension == "jar" })
+            startScriptsTask.outputDir.copyRecursivelyIfDifferent(binFolder)
+
+            val files = getDependencies() + jarTask.outputs.files.filter { it.extension == "jar" }
+            for(file in files){
+                file.copyToIfDifferent(File(libFolder, file.name))
             }
-        }
-        task.into("bin") {
-            it.from(startScriptsTask.outputDir)
         }
     }
 

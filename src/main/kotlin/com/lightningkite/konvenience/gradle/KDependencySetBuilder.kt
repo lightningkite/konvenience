@@ -49,7 +49,7 @@ fun KDependencySetBuilder.coroutines(version: String) = KTargetDependencySet("Ko
 fun KDependencySetBuilder.ktorClient(version: String) = KTargetDependencySet("KTor Client") {
     api = maven("io.ktor", "ktor-client-core", version)
     isAndroid uses maven("io.ktor", "ktor-client-android", version)
-    isJvm uses maven("io.ktor", "ktor-client-cio", version)
+    isJvm uses maven("io.ktor", "ktor-client-okhttp", version)
     isJs uses maven("io.ktor", "ktor-client-js", version)
     isIos uses maven("io.ktor", "ktor-client-ios", version)
     isMingwX64 uses maven("io.ktor", "ktor-client-curl-mingwx64", version)
