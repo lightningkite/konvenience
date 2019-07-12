@@ -3,20 +3,32 @@ package com.lightningkite.konvenience.gradle
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJvmCompilation
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinOnlyTarget
+import org.jetbrains.kotlin.konan.target.Family
+import org.jetbrains.kotlin.konan.target.KonanTarget
 import java.io.File
 import java.util.concurrent.TimeUnit
 
 fun Project.iosApp(
-        frameworkName: String = project.name.replace("-", "_")
+        frameworkName: String = project.name.replace("-", "_"),
+        exportDependencies: Boolean = false
 ) {
     val extension: KotlinMultiplatformExtension = this.extensions.getByType(KotlinMultiplatformExtension::class.java)
+
     KTarget.allLogic.filter { KTargetPredicates.isIos(it) }.forEach { target ->
         if (target.worksOnMyPlatform()) {
             extension.targets.findByName(target.name)?.let { it as? KotlinNativeTarget }?.run {
                 binaries.framework {
                     this.baseName = frameworkName
+                    if (exportDependencies) {
+                        transitiveExport = true
+                        println("${this.exportConfigurationName} extends ${this@run.name}Api")
+                        project.configurations.getByName(this.exportConfigurationName).extendsFrom(project.configurations.getByName("${this@run.name}Api"))
+                    }
                 }
             }
         }
@@ -65,6 +77,7 @@ fun Project.taskXcodeAccess(
         it.group = "ios"
         it.dependsOn(dependsOn)
         it.doLast {
+            destination.mkdirs()
             frameworkMainLocation.copyRecursively(File(destination, "$frameworkName.framework"), overwrite = true)
             frameworkDsymLocation.copyRecursively(File(destination, "$frameworkName.framework.dSYM"), overwrite = true)
         }

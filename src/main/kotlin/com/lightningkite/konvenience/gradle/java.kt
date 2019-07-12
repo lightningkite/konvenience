@@ -80,7 +80,7 @@ fun Project.javaApp(forTarget: KTarget = KTarget.jvm, mainClassName: String) {
         task.applicationName = name
         task.doLast {
             println("Trying to replace BAT")
-            task.outputDir.listFiles().find { it.extension.toLowerCase() == "bat" }?.let { windowsFile ->
+            task.outputDir?.listFiles()?.find { it.extension.toLowerCase() == "bat" }?.let { windowsFile ->
                 val list = windowsFile.readLines().toMutableList()
                 val index = list.indexOfFirst { it.startsWith("set CLASSPATH=", true) }
                 if(index != -1){
@@ -103,7 +103,7 @@ fun Project.javaApp(forTarget: KTarget = KTarget.jvm, mainClassName: String) {
             val binFolder = File(destination, "bin")
             val libFolder = File(destination, "lib")
 
-            startScriptsTask.outputDir.copyRecursivelyIfDifferent(binFolder)
+            startScriptsTask.outputDir?.copyRecursivelyIfDifferent(binFolder)
 
             val files = getDependencies() + jarTask.outputs.files.filter { it.extension == "jar" }
             for(file in files){
