@@ -141,6 +141,7 @@ data class KTarget(
         val jvmVirtual = jvm.copy(name = "jvmVirtual", attributes = mapOf(UI to "jvmVirtual"))
         val javafx = jvm.copy(name = "javafx", attributes = mapOf(UI to "javafx"))
         val swing = jvm.copy(name = "swing", attributes = mapOf(UI to "swing"))
+        val lanterna = jvm.copy(name = "lanterna", attributes = mapOf(UI to "lanterna"))
 
         val android = KTarget(
                 name = "android",
