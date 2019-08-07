@@ -16,7 +16,7 @@ class DoubleSourceSetBuilder(
     var supportedTargets: KTargetPredicate = targets
 
     init {
-        var needsIntelliJConfiguration = System.getProperty("idea.resolveSourceSetDependencies") != null
+        var needsIntelliJConfiguration = isSyncingIntelliJ
         tryTargets.filter(targets).forEach { target ->
             if (target.worksOnMyPlatform() && target.name.toLowerCase() != name.toLowerCase()) {
                 target.sources {

@@ -46,6 +46,18 @@ fun KDependencySetBuilder.coroutines(version: String) = KTargetDependencySet("Ko
     isNativeCommonlyReleased uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native", version)
 }
 
+fun KDependencySetBuilder.io(version: String) = KTargetDependencySet("KotlinX IO") {
+    api = maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io", version)
+    isJvm uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-jvm", version)
+    isJs uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-js", version)
+    isIosArm32 uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-iosarm32", version)
+    isIosArm64 uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-iosarm64", version)
+    isIosX64 uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-iosx64", version)
+    isMingwX64 uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-windowsx64", version)
+    isLinuxX64 uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-linuxx64", version)
+    isMacosX64 uses maven("org.jetbrains.kotlinx", "kotlinx-coroutines-io-macosx64", version)
+}
+
 fun KDependencySetBuilder.ktorClient(version: String) = KTargetDependencySet("KTor Client") {
     api = maven("io.ktor", "ktor-client-core", version)
     isAndroid uses maven("io.ktor", "ktor-client-android", version)
