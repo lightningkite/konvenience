@@ -100,7 +100,8 @@ fun Project.jsApp(forTarget: KTarget) {
                     "license": "None",
                     "devDependencies": {
                       "webpack": "^4.20.2",
-                      "webpack-cli": "^3.1.2"
+                      "webpack-cli": "^3.1.2",
+                      "text-encoding": "^0.7.0",
                     }
                 }
             """.trimIndent())
